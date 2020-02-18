@@ -46,6 +46,7 @@
     "react-navigation-stack": "2.0.9",
     "reactotron-mst": "^3.1.1",
     "reactotron-react-native": "^4.0.0-beta.1",
+    "socket.io-client": "^2.3.0",
     "validate.js": "0.13.1"
   },
   "devDependencies": {
@@ -60,6 +61,7 @@
     "@types/ramda": "0.26.18",
     "@types/react": "16.8.24",
     "@types/react-native": "0.60.19",
+    "@types/react-navigation": "^3.4.0",
     "@types/react-test-renderer": "16.8.3",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",

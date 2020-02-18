@@ -1,0 +1,12 @@
+
+let socket: any = null
+
+export function setSocket(mSocket: any) {
+  socket = mSocket
+}
+export function listenSocket(name: string, func: (data?: any) => void) {
+  socket.on(name, func)
+}
+export function emitSocket(name: string, value?: any) {
+  socket.emit(name, value)
+}

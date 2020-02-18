@@ -7,9 +7,11 @@ import React, { useState, useEffect } from "react"
 import { AppRegistry, YellowBox } from "react-native"
 import { StatefulNavigator, BackButtonHandler, exitRoutes } from "./navigation"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
+import io from 'socket.io-client'
 
 import { contains } from "ramda"
 import { enableScreens } from "react-native-screens"
+import {setSocket} from "./utils/socket-service";
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -52,6 +54,7 @@ const canExit = (routeName: string) => contains(routeName, exitRoutes)
 export const App: React.FunctionComponent<{}> = () => {
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined) // prettier-ignore
   useEffect(() => {
+    setSocket(io('http://vps1.audition2.com:3000'))
     setupRootStore().then(setRootStore)
   }, [])
 

@@ -31,6 +31,7 @@ export async function setupRootStore() {
   // prepare the environment that will be associated with the RootStore.
   const env = await createEnvironment()
   try {
+    storage.remove(ROOT_STATE_STORAGE_KEY)
     // load data from storage
     data = (await storage.load(ROOT_STATE_STORAGE_KEY)) || {}
     rootStore = RootStoreModel.create(data, env)
