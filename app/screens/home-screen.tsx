@@ -6,7 +6,7 @@ import { useStores } from "../models/root-store"
 import { color } from "../theme"
 
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation"
-import { emitSocket, listenSocket } from "../utils/socket-service"
+import { listenSocket } from "../utils/socket-service"
 
 export interface HomeScreenProps {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>
