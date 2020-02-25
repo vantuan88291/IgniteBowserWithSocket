@@ -1,12 +1,12 @@
 import * as React from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { ViewStyle, FlatList } from "react-native"
 import { Button, Screen, Text } from "../components"
 import { useStores } from "../models/root-store"
 import { color } from "../theme"
 
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation"
-import { listenSocket } from "../utils/socket-service"
+import { disConnectSocket, listenSocket } from "../utils/socket-service"
 
 export interface HomeScreenProps {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>
@@ -20,18 +20,29 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer((pr
   const { home } = useStores()
   React.useEffect(() => {
     listenSocket("allData", home.setDataChat)
+    listenSocket("newmsg", home.getNewMessage)
   }, [])
   const getSMS = () => {
     home.getAllMessage()
   }
-  const navigateTest = () => props.navigation.navigate('chatScreen')
+  const navigateTest = () => {
+    disConnectSocket()
+    props.navigation.navigate('chatScreen')
+  }
+  const renderItem = ({ item }) => {
+    return (
+      <Text text={item.message} />
+    )
+  }
   return (
     <Screen style={ROOT} preset="fixed">
       <Button onPress={getSMS} text={'get message'} />
       <Button onPress={navigateTest} text={'navigate '} />
-      {home.getData.map(item => (
-        <Text text={item.name} />
-      ))}
+      <FlatList
+        extraData={home.getData.length}
+        data={home.getData}
+        keyExtractor={(item, index) => index + ''}
+        renderItem={renderItem}/>
     </Screen>
   )
 })

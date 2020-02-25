@@ -17,8 +17,8 @@ export const ChatScreen: React.FunctionComponent<ChatScreenProps> = observer((pr
   const { home } = useStores()
   return (
     <Screen style={ROOT} preset="fixed">
-      {home.getData.map(item => (
-        <Text text={item.name} />
+      {home.getData.map((item, index) => (
+        <Text key={index} text={item.message} />
       ))}
     </Screen>
   )

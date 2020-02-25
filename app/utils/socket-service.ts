@@ -10,3 +10,7 @@ export function listenSocket(name: string, func: (data?: any) => void) {
 export function emitSocket(name: string, value?: any) {
   socket.emit(name, value)
 }
+export function disConnectSocket() {
+  console.log('disconect')
+  socket.disconnect()
+}

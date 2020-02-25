@@ -19,7 +19,13 @@ export const HomeModel = types
     getAllMessage: () => {
       emitSocket("getAllData")
     },
-    setDataChat: (data: any) => {
+    getNewMessage: (data) => {
+      console.log('in new msg', data)
+      self.dataChat.push(data)
+    },
+    setDataChat: (data) => {
+      console.log('in all msg', data)
+
       self.dataChat.replace(data)
     }
   })) // eslint-disable-line @typescript-eslint/no-unused-vars
