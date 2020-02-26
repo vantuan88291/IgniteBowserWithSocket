@@ -5,7 +5,12 @@ import { Button, Screen, Text } from "../components"
 import { useStores } from "../models/root-store"
 import { color } from "../theme"
 
-import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation"
+import {
+  NavigationActions,
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState
+} from "react-navigation"
 import { disConnectSocket, listenSocket } from "../utils/socket-service"
 
 export interface HomeScreenProps {
@@ -17,7 +22,7 @@ const ROOT: ViewStyle = {
 }
 
 export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer((props) => {
-  const { home } = useStores()
+  const { home, navigationStore } = useStores()
   React.useEffect(() => {
     listenSocket("allData", home.setDataChat)
     listenSocket("newmsg", home.getNewMessage)
@@ -27,7 +32,10 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = observer((pr
   }
   const navigateTest = () => {
     disConnectSocket()
-    props.navigation.navigate('chatScreen')
+    // props.navigation.navigate('chatScreen')
+    navigationStore.dispatch(NavigationActions.navigate({
+      routeName: 'chatScreen'
+    }), true)
   }
   const renderItem = ({ item }) => {
     return (
