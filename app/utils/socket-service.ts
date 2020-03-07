@@ -1,5 +1,5 @@
 
-let socket: any = null
+export let socket: any = null
 
 export function setSocket(mSocket: any) {
   socket = mSocket
